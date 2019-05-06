@@ -1,8 +1,8 @@
-let fs = require('fs');
-let express = require('express');
-let bodyParser = require('body-parser');
+const fs = require('fs');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-let RBT = require('icu-transliterator').RBT;
+const RBT = require('icu-transliterator').RBT;
 registerCustomTransliterators();
 
 let app = express();
