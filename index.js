@@ -6,7 +6,7 @@ const RBT = require('icu-transliterator').RBT;
 registerCustomTransliterators();
 
 let app = express();
-
+app.disable('x-powered-by');
 app.use(bodyParser.text({ type: '*/*' }));
 
 app.post('/:id', transliterate(RBT.FORWARD));
