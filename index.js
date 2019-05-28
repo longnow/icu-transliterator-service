@@ -16,8 +16,9 @@ app.post('/:id/reverse', transliterate(RBT.REVERSE));
 app.listen(process.env.PORT || 3000);
 
 function registerCustomTransliterators() {
-  if (fs.existsSync('./transliterators.json')) {
-    let t = require('./transliterators.json');
+  let transliterators = __dirname + '/transliterators.json';
+  if (fs.existsSync(transliterators)) {
+    let t = require(transliterators);
 
     t.forEach(function (obj) {
       RBT.register(obj.name, obj.rules);
