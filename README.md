@@ -2,7 +2,7 @@
 
 This is a simple node.js web service to transliterate text via ICU [rule-based transliterators](http://userguide.icu-project.org/transforms/general#TOC-Rule-Based-Transliterators). It requires the `icu-transliterator` module, for which you will need to [install ICU components](https://github.com/longnow/node-icu-transliterator).
 
-To start the server, simply run:
+To start the server, install modules via `npm install`, then simply run:
 
 ```
 $ node index.js
