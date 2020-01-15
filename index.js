@@ -29,9 +29,7 @@ function registerCustomTransliterators() {
 function transliterate(dir) {
   return function(req, res) {
     try {
-      let myRBT = RBT(req.params.id, dir);
-      let output = myRBT.transliterate(req.body);
-
+      let output = RBT(req.params.id, dir).transliterate(req.body);
       if (req.headers['user-agent'].match(/^curl\//)) {
         output += '\n';
       }
