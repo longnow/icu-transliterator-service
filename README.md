@@ -8,7 +8,7 @@ To start the server, install modules via `npm install`, then simply run:
 $ node index.js
 ```
 
-The server will listen on `localhost`. The default port is 3000, which you can override with the `PORT` environment variable.
+The server will listen on `localhost` port 3000 by default. You can override the default listen host address by setting the `LISTENADDR` environment variable, and the default port by setting the `PORT` environment variable.
 
 To use the server, POST the text you wish to transliterate to a path containing the registered transliterator ID. The response will be the transliteration in plain text. For example:
 

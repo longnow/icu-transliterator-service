@@ -13,7 +13,7 @@ app.post('/:id', transliterate(RBT.FORWARD));
 app.post('/:id/forward', transliterate(RBT.FORWARD));
 app.post('/:id/reverse', transliterate(RBT.REVERSE));
 
-app.listen(process.env.PORT || 3000, 'localhost');
+app.listen(process.env.PORT || 3000, process.env.LISTENADDR || 'localhost');
 
 function registerCustomTransliterators() {
   let transliterators = __dirname + '/transliterators.json';
