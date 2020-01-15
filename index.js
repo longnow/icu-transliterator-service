@@ -30,8 +30,14 @@ function transliterate(dir) {
   return function(req, res) {
     try {
       let myRBT = RBT(req.params.id, dir);
+      let output = myRBT.transliterate(req.body);
+
+      if (req.headers['user-agent'].match(/^curl\//)) {
+        output += '\n';
+      }
+
       res.set('Content-type', 'text/plain');
-      res.send(myRBT.transliterate(req.body));
+      res.send(output);
     } catch (e) {
       console.error(e);
       res.sendStatus(409);
