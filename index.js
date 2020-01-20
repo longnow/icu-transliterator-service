@@ -30,7 +30,7 @@ function transliterate(dir) {
   return function(req, res) {
     try {
       let output = RBT(req.params.id, dir).transliterate(req.body);
-      if (req.headers['user-agent'].match(/^curl\//)) {
+      if (req.headers['user-agent'] && req.headers['user-agent'].match(/^curl\//)) {
         output += '\n';
       }
 
