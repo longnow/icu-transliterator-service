@@ -6,17 +6,17 @@ const bodyParser = require('body-parser');
 const RBT = require('icu-transliterator').RBT;
 registerCustomTransliterators();
 
+const app = express();
+app.disable('x-powered-by');
+
 let listenDefault = 'localhost';
 let mountDir = '/';
 configToolforge();
 
-const app = express();
-app.disable('x-powered-by');
 app.use(bodyParser.text({ type: '*/*' }));
 
 const router = express.Router();
 app.use(mountDir, router);
-
 router.post('/:id', transliterate(RBT.FORWARD));
 router.post('/:id/forward', transliterate(RBT.FORWARD));
 router.post('/:id/reverse', transliterate(RBT.REVERSE));
@@ -28,6 +28,7 @@ function configToolforge() {
   if (matches) {
     listenDefault = '0.0.0.0';
     mountDir = '/' + matches[1];
+    app.use(require('cors'));
   }
 }
 
