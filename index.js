@@ -27,7 +27,7 @@ function configToolforge() {
   const matches = os.userInfo().username.match(/^tools\.(.+)$/);
   if (matches) {
     listenDefault = '0.0.0.0';
-    mountDir = '/' + matchces[1];
+    mountDir = '/' + matches[1];
   }
 }
 
