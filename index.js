@@ -2,6 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const RBT = require('icu-transliterator').RBT;
 registerCustomTransliterators();
@@ -28,7 +29,7 @@ function configToolforge() {
   if (matches) {
     listenDefault = '0.0.0.0';
     mountDir = '/' + matches[1];
-    app.use(require('cors'));
+    app.use(cors());
   }
 }
 
