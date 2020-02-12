@@ -1,24 +1,40 @@
 const fs = require('fs');
+const os = require('os');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const RBT = require('icu-transliterator').RBT;
 registerCustomTransliterators();
 
-let app = express();
+let listenDefault = 'localhost';
+let mountDir = '/';
+configToolforge();
+
+const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.text({ type: '*/*' }));
 
-app.post('/:id', transliterate(RBT.FORWARD));
-app.post('/:id/forward', transliterate(RBT.FORWARD));
-app.post('/:id/reverse', transliterate(RBT.REVERSE));
+const router = express.Router();
+app.use(mountDir, router);
 
-app.listen(process.env.PORT || 3000, process.env.LISTENADDR || 'localhost');
+router.post('/:id', transliterate(RBT.FORWARD));
+router.post('/:id/forward', transliterate(RBT.FORWARD));
+router.post('/:id/reverse', transliterate(RBT.REVERSE));
+
+app.listen(process.env.PORT || 3000, process.env.LISTENADDR || listenDefault);
+
+function configToolforge() {
+  const matches = os.userInfo().username.match(/^tools\.(.+)$/);
+  if (matches) {
+    listenDefault = '0.0.0.0';
+    mountDir = '/' + matchces[1];
+  }
+}
 
 function registerCustomTransliterators() {
-  let transliterators = __dirname + '/transliterators.json';
+  const transliterators = __dirname + '/transliterators.json';
   if (fs.existsSync(transliterators)) {
-    let t = require(transliterators);
+    const t = require(transliterators);
 
     t.forEach(function (obj) {
       RBT.register(obj.name, obj.rules);
